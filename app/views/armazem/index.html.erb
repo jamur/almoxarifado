@@ -1,16 +1,16 @@
 <!DOCTYPE html>
-<% if notice %>
-<p id="notice" ><%= notice %></p>
-<% end %>
-<h1>Lista de Produtos</h1>
-<% @produtos.each do |produto| %>
-<div class="entry" >
-<h3><%= produto.nome %></h3>
-<%=sanitize produto.descricao %>
-<div class="valor_linha" >
-<span class="valor"><%= number_to_currency(produto.valor) %></span>
-<%= button_to 'Adicionar ao Carrinho', linha_items_path(:produto_id => produto),
-:remote => true %>
-</div>
-</div>
-<% end %>
+  <% if notice %>
+    <p id="notice" ><%= notice %></p>
+  <% end %>
+  <h1>Lista de Produtos</h1>
+    <% @produtos.each do |produto| %>
+      <div class="entry" >
+        <h3><%= produto.nome %></h3>
+        <%=sanitize produto.descricao %>
+        <div class="valor_linha" >
+          <span class="valor"><%= number_to_currency(produto.valor) %></span>
+          <%= button_to 'Adicionar ao Carrinho', linha_items_path(:produto_id => produto),
+          :remote => true %>
+        </div>
+      </div>
+    <% end %>

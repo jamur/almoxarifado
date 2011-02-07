@@ -13,17 +13,17 @@ class CarrinhosController < ApplicationController
   # GET /carrinhos/1
   # GET /carrinhos/1.xml
   def show
-	begin
-		@carrinho = Carrinho.find(params[:id])
-	rescue ActiveRecord::RecordNotFound
-		logger.error "Attempt to access invalid cart #{params[:id]}"
-		redirect_to armazem_url, :notice => 'Carrinho Invalido'
-	else
-		respond_to do |format|
-			format.html # show.html.erb
+	 begin
+	   @carrinho = Carrinho.find(params[:id])
+	 rescue ActiveRecord::RecordNotFound
+	   logger.error "Attempt to access invalid cart #{params[:id]}"
+	   redirect_to armazem_url, :notice => 'Carrinho Invalido'
+	 else
+	   respond_to do |format|
+      format.html # show.html.erb
 			format.xml  { render :xml => @carrinho }
-		end
-	end
+		 end
+	 end
   end
 
   # GET /carrinhos/new

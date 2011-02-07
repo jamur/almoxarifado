@@ -1,5 +1,5 @@
 class BuscaController < ApplicationController
-def index
-  @produtos = Produto.all
-end
+  def index
+    @produtos = Produto.all
+  end
 end

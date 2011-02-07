@@ -3,12 +3,11 @@ class ProdutosController < ApplicationController
   # GET /produtos.xml
   def index
     if params[:search]
-		@produtos = Produto.find(:all, :conditions => ['nome LIKE ?' , "%#{params[:search]}%"])
+		  @produtos = Produto.find(:all, :conditions => ['nome LIKE ?' , "%#{params[:search]}%"])
     else 
-		@produtos = Produto.all
-   end
+		  @produtos = Produto.all
+    end
 		
-
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @produtos }
@@ -22,6 +21,7 @@ class ProdutosController < ApplicationController
   
   def show
     @produto = Produto.find(params[:id])
+  
     respond_to do |format|
       format.html # show.html.erb
       format.xml  { render :xml => @produto }
@@ -51,7 +51,7 @@ class ProdutosController < ApplicationController
 
     respond_to do |format|
       if @produto.save
-        format.html { redirect_to(@produto, :notice => 'Produto was successfully created.') }
+        format.html { redirect_to(@produto, :notice => 'Produto foi cadastrado com sucesso.') }
         format.xml  { render :xml => @produto, :status => :created, :location => @produto }
       else
         format.html { render :action => "new" }
@@ -88,15 +88,15 @@ class ProdutosController < ApplicationController
     end
   end
 
-def busca
-  @produtos = Produto.busca params[:busca]
-end
+  def busca
+    @produtos = Produto.busca params[:busca]
+  end
 
-def quem_comprou
-@produto = Produto.find(params[:id])
-respond_to do |format|
-format.atom
-format.xml { render :xml => @produto }
-end
-end
+  def quem_comprou
+    @produto = Produto.find(params[:id])
+    respond_to do |format|
+      format.atom
+      format.xml { render :xml => @produto }
+    end
+  end
 end
