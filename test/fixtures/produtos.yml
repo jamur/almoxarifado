@@ -1,0 +1,17 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  nome: MyString
+  descricao: MyText
+  valor: 9.99
+  estoqueatual: 1
+  estoquemin: 1
+  ativo: false
+
+two:
+  nome: MyString
+  descricao: MyText
+  valor: 9.99
+  estoqueatual: 1
+  estoquemin: 1
+  ativo: false

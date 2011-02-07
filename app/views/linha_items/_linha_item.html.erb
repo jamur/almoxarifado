@@ -1,0 +1,9 @@
+<% if linha_item == @corrente_item %>
+<tr id="corrente_item" >
+<% else %>
+<tr>
+<% end %>
+	<td><%= linha_item.quantidade %> &times </td>
+	<td><%= linha_item.produto.nome %> </td>
+	<td class="item_valor"><%= number_to_currency(linha_item.total_valor)%> </td>
+</tr>

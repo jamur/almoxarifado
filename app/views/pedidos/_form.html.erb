@@ -1,0 +1,34 @@
+<%= form_for @pedido do |f| %>
+<% if @pedido.errors.any? %>
+<div id="error_explanation" >
+<h2><%= pluralize(@pedido.errors.count, "error") %>
+prohibited this pedido from being saved:</h2>
+<ul>
+<% @pedido.errors.full_messages.each do |msg| %>
+<li><%= msg %></li>
+<% end %>
+</ul>
+</div>
+<% end %>
+<div>
+<%= f.label :retirante_id, "Nome:" %>
+<%= select("pedido", "retirante_id", Retirante.all.collect {|p| [ p.nome, p.id ] }, {:include_blank => 'None'}) %>
+</div>
+<div>
+<%= f.label :endereco, "Endereco:" %>
+<%= f.text_area :endereco, :rows => 3, :cols => 40 %>
+</div>
+<div>
+<%= f.label :email, "E-Mail:" %>
+<%= f.email_field :email, :size => 40 %>
+</div>
+<div>
+<%= f.label :pagamento, "Pay with:" %>
+<%=
+f.select :pagamento,
+Pedido::PAYMENT_TYPES,
+:prompt => "Select a payment method"
+%>
+</div>
+<%= f.submit "Place Order" %>
+<% end %>

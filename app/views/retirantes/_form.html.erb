@@ -1,0 +1,41 @@
+<%= form_for(@retirante) do |f| %>
+  <% if @retirante.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@retirante.errors.count, "error") %> prohibited this retirante from being saved:</h2>
+
+      <ul>
+      <% @retirante.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :nome %><br />
+    <%= f.text_field :nome %>
+  </div>
+  <div class="field">
+    <%= f.label :celular %><br />
+    <%= f.text_field :celular %>
+  </div>
+  <div class="field">
+    <%= f.label :email %><br />
+    <%= f.text_field :email %>
+  </div>
+  <div class="field">
+    <%= f.label :siap %><br />
+    <%= f.text_field :siap %>
+  </div>
+  <div class="field">
+    <%= f.label :siad %><br />
+    <%= f.text_field :siad %>
+  </div>
+  <div class="field">
+    <%= f.label :categoria %><br />
+    <%= f.text_field :categoria %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

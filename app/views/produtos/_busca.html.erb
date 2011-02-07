@@ -1,0 +1,5 @@
+<% form_tag :controller => 'produtos', :action => 'busca', :method => 'get' do %>
+2      <%= text_field_tag :busca, params[:busca], :id => 'busca_field' %>
+3      <%= submit_tag "Busca", :nome => nil %> 
+4      <%= link_to_function "Clear", "$('busca 			 _field').clear()" %>
+5  <% end %> 

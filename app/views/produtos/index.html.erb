@@ -1,0 +1,35 @@
+
+<% #encoding: utf-8 %>
+<div id="produto_lista"
+<h1>Lista de Produtos</h1>
+
+<% form_tag produtos_path, :method => 'get' do %>
+<P>
+<%= text_field_tag :search %>
+<%= submit_tag "search" %>
+</p>
+
+<%end%>
+    <table>
+  <% @produtos.each do |produto| %>
+  <tr class= "<%= cycle('list_line_odd','list_line_even') %> ">
+      <td class ="lista_descricao">
+      <dl>
+        <dt><%=produto.nome%></dt>
+        <dd><%=produto.descricao%></dd>
+        </dl>
+    </td>
+    <td class="lista_acoes">
+      <%= link_to 'Show', produto %><br/>
+<%= link_to 'Edit', edit_produto_path(produto) %><br/>
+<%= link_to 'Destroy', produto,
+:confirm => 'Tem certeza?',
+:method => :delete %>
+    </td>
+  </tr>
+  <%end%>
+</table>
+</div>
+<br/>
+
+<%= link_to 'Novo Produto', new_produto_path %>

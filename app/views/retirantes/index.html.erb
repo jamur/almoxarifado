@@ -1,0 +1,33 @@
+<h1>Listing retirantes</h1>
+
+<table>
+  <tr>
+    <th>Nome</th>
+    <th>Celular</th>
+    <th>Email</th>
+    <th>Siap</th>
+    <th>Siad</th>
+    <th>Categoria</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @retirantes.each do |retirante| %>
+  <tr>
+    <td><%= retirante.nome %></td>
+    <td><%= retirante.celular %></td>
+    <td><%= retirante.email %></td>
+    <td><%= retirante.siap %></td>
+    <td><%= retirante.siad %></td>
+    <td><%= retirante.categoria %></td>
+    <td><%= link_to 'Show', retirante %></td>
+    <td><%= link_to 'Edit', edit_retirante_path(retirante) %></td>
+    <td><%= link_to 'Destroy', retirante, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Retirante', new_retirante_path %>

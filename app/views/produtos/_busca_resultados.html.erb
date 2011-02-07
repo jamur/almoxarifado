@@ -1,0 +1,6 @@
+<ul>
+    <% @produtos.each do |produto| %>
+  <li><%= link_to produto.nome, 
+    :action => 'show', :id => produto.id  %></li>
+  <% end %>
+  </ul>

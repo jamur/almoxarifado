@@ -1,0 +1,34 @@
+<div id="produto_lista"
+<h1>Lista de Pprodutos</h1>
+
+<table>
+  <tr>
+    <th>Nome</th>
+    <th>Descricao</th>
+    <th>Valor</th>
+    <th>Estoqueatual</th>
+    <th>Estoquemin</th>
+    <th>Ativo</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @produtos.each do |produto| %>
+  <tr>
+    <td><%= produto.nome %></td>
+    <td><%= produto.descricao %></td>
+    <td><%= produto.valor %></td>
+    <td><%= produto.estoqueatual %></td>
+    <td><%= produto.estoquemin %></td>
+    <td><%= produto.ativo %></td>
+    <td><%= link_to 'Show', produto %></td>
+    <td><%= link_to 'Edit', edit_produto_path(produto) %></td>
+    <td><%= link_to 'Destroy', produto, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Produto', new_produto_path %>

@@ -1,0 +1,11 @@
+<div class = "carrinho_nome"> Seu Carrinho </div>
+<table>
+<%= render(@carrinho.linha_items) %>
+
+<tr class="total_linha" >
+<td colspan="2" >Total</td>
+<td class="total_celula" ><%= number_to_currency(@carrinho.total_valor) %></td>
+</tr>
+<table>
+<%= button_to 'Empty cart', @carrinho, :method => :delete,
+:confirm => 'Deseja realmente excluir os produtos?' %>
