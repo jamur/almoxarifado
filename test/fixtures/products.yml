@@ -1,0 +1,23 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/Fixtures.html
+
+one:
+  product_category_id: 1
+  title: MyString
+  description: MyText
+  image_url: MyString
+  price: 9.99
+  status: false
+  stock_qty: 1
+  stock_min: 1
+  validaty: 2011-09-13 00:24:55
+
+two:
+  product_category_id: 1
+  title: MyString
+  description: MyText
+  image_url: MyString
+  price: 9.99
+  status: false
+  stock_qty: 1
+  stock_min: 1
+  validaty: 2011-09-13 00:24:55

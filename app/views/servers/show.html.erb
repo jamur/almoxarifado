@@ -1,0 +1,35 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Name:</b>
+  <%= @server.name %>
+</p>
+
+<p>
+  <b>Server category:</b>
+  <%= @server.server_category_id %>
+</p>
+
+<p>
+  <b>Siad:</b>
+  <%= @server.siad %>
+</p>
+
+<p>
+  <b>Phone:</b>
+  <%= @server.phone %>
+</p>
+
+<p>
+  <b>Email:</b>
+  <%= @server.email %>
+</p>
+
+<p>
+  <b>Obs:</b>
+  <%= @server.obs %>
+</p>
+
+
+<%= link_to 'Edit', edit_server_path(@server) %> |
+<%= link_to 'Back', servers_path %>

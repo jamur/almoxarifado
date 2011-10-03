@@ -1,0 +1,9 @@
+Prezado(a) <%= @order.server.name %>
+
+Você solicitou e retirou os seguintes itens do almoxarifado:
+
+<%= render @order.line_items %>
+
+Total do pedido: <%= @order.total_price %>
+Na data de: <%= @order.created_at %>
+

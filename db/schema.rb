@@ -11,37 +11,44 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111002022104) do
+ActiveRecord::Schema.define(:version => 20111003174059) do
 
-  create_table "carrinhos", :force => true do |t|
+  create_table "carts", :force => true do |t|
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  create_table "linha_items", :force => true do |t|
-    t.integer  "produto_id"
-    t.integer  "carrinho_id"
+  create_table "line_items", :force => true do |t|
+    t.integer  "product_id"
+    t.integer  "qty",        :default => 1
+    t.integer  "cart_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "quantidade",  :default => 1
+    t.integer  "order_id"
   end
 
-  create_table "pedidos", :force => true do |t|
+  create_table "orders", :force => true do |t|
+    t.integer  "server_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "product_categories", :force => true do |t|
     t.string   "nome"
-    t.text     "endereco"
-    t.string   "email"
-    t.string   "pagamento"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  create_table "produtos", :force => true do |t|
-    t.string   "nome"
-    t.text     "descricao"
-    t.decimal  "valor",        :precision => 8, :scale => 2
-    t.integer  "estoqueatual"
-    t.integer  "estoquemin"
-    t.boolean  "ativo",                                      :default => true
+  create_table "products", :force => true do |t|
+    t.integer  "product_category_id"
+    t.string   "title"
+    t.text     "description"
+    t.string   "image_url"
+    t.decimal  "price",               :precision => 8, :scale => 2, :default => 0.0
+    t.boolean  "status"
+    t.integer  "stock_qty"
+    t.integer  "stock_min"
+    t.datetime "validate"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -59,18 +66,28 @@ ActiveRecord::Schema.define(:version => 20111002022104) do
 
   add_index "rails_admin_histories", ["item", "table", "month", "year"], :name => "index_rails_admin_histories"
 
-  create_table "retirantes", :force => true do |t|
-    t.string   "nome"
-    t.string   "celular"
-    t.string   "email"
-    t.integer  "siap"
+  create_table "server_categories", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "servers", :force => true do |t|
+    t.string   "name"
+    t.integer  "server_category_id"
     t.integer  "siad"
-    t.string   "categoria"
+    t.integer  "phone"
+    t.string   "email"
+    t.text     "obs"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   create_table "users", :force => true do |t|
+    t.string   "name"
+    t.string   "password_digest"
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.string   "email",                                 :default => "", :null => false
     t.string   "encrypted_password",     :limit => 128, :default => "", :null => false
     t.string   "reset_password_token"
@@ -81,8 +98,6 @@ ActiveRecord::Schema.define(:version => 20111002022104) do
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip"
     t.string   "last_sign_in_ip"
-    t.datetime "created_at"
-    t.datetime "updated_at"
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true

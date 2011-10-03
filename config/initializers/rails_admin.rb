@@ -6,14 +6,14 @@
 #          888  `88b.  d8(  888   888   888  o.  )88b  .8'     `888.  888   888   888   888   888   888   888   888  
 #         o888o  o888o `Y888""8o o888o o888o 8""888P' o88o     o8888o `Y8bod88P" o888o o888o o888o o888o o888o o888o 
 
-# RailsAdmin config file. Generated on October 01, 2011 23:21
+# RailsAdmin config file. Generated on October 03, 2011 14:40
 # See github.com/sferik/rails_admin for more informations
 
 RailsAdmin.config do |config|
   
   config.current_user_method { current_user } # auto-generated
   
-  config.main_app_name { ['Almoxarifado', 'Admin'] } # auto-generated
+  config.main_app_name { ['Almox31_application', 'Admin'] } # auto-generated
   
   #  ==> Authentication (before_filter)
   # This is run inside the controller instance so you can setup any authentication you need to.
@@ -57,10 +57,10 @@ RailsAdmin.config do |config|
   
   #  ==> Included models
   # Add all excluded models here:
-  # config.excluded_models << [Carrinho, LinhaItem, Pedido, Produto, Retirante]
+  # config.excluded_models << [Cart, LineItem, Order, Product, ProductCategory, Server, ServerCategory]
   
   # Add models here if you want to go 'whitelist mode':
-  # config.included_models << [Carrinho, LinhaItem, Pedido, Produto, Retirante]
+  # config.included_models << [Cart, LineItem, Order, Product, ProductCategory, Server, ServerCategory]
   
   # Application wide tried label methods for models' instances
   # config.label_methods << [:description] # Default is [:name, :title]
@@ -134,9 +134,13 @@ RailsAdmin.config do |config|
 #  - has_many/has_one associations in list section (hidden by default for performance reasons)
 # Fields may also be marked as read_only (and thus not editable) if they are not mass-assignable by current_user
 
-  # config.model Carrinho do
+  # config.model Cart do
   #   # Found associations: 
+  #   field :line_items, :has_many_association
   #   # Found columns:
+  #   field :id, :integer
+  #   field :created_at, :datetime
+  #   field :updated_at, :datetime
   #   # Sections: 
   #   list do; end
   #   export do; end
@@ -156,9 +160,19 @@ RailsAdmin.config do |config|
 #  - has_many/has_one associations in list section (hidden by default for performance reasons)
 # Fields may also be marked as read_only (and thus not editable) if they are not mass-assignable by current_user
 
-  # config.model LinhaItem do
+  # config.model LineItem do
   #   # Found associations: 
+  #   field :product, :belongs_to_association
+  #   field :cart, :belongs_to_association
+  #   field :order, :belongs_to_association
   #   # Found columns:
+  #   field :id, :integer
+  #   field :product_id, :integer        # Hidden
+  #   field :qty, :integer
+  #   field :cart_id, :integer        # Hidden
+  #   field :created_at, :datetime
+  #   field :updated_at, :datetime
+  #   field :order_id, :integer        # Hidden
   #   # Sections: 
   #   list do; end
   #   export do; end
@@ -178,9 +192,15 @@ RailsAdmin.config do |config|
 #  - has_many/has_one associations in list section (hidden by default for performance reasons)
 # Fields may also be marked as read_only (and thus not editable) if they are not mass-assignable by current_user
 
-  # config.model Pedido do
+  # config.model Order do
   #   # Found associations: 
+  #   field :line_items, :has_many_association
+  #   field :server, :belongs_to_association
   #   # Found columns:
+  #   field :id, :integer
+  #   field :server_id, :integer        # Hidden
+  #   field :created_at, :datetime
+  #   field :updated_at, :datetime
   #   # Sections: 
   #   list do; end
   #   export do; end
@@ -200,9 +220,24 @@ RailsAdmin.config do |config|
 #  - has_many/has_one associations in list section (hidden by default for performance reasons)
 # Fields may also be marked as read_only (and thus not editable) if they are not mass-assignable by current_user
 
-  # config.model Produto do
+  # config.model Product do
   #   # Found associations: 
+  #   field :product_category, :belongs_to_association
+  #   field :line_items, :has_many_association
+  #   field :orders, :has_many_association
   #   # Found columns:
+  #   field :id, :integer
+  #   field :product_category_id, :integer        # Hidden
+  #   field :title, :string
+  #   field :description, :text
+  #   field :image_url, :string
+  #   field :price, :decimal
+  #   field :status, :boolean
+  #   field :stock_qty, :integer
+  #   field :stock_min, :integer
+  #   field :validate, :datetime
+  #   field :created_at, :datetime
+  #   field :updated_at, :datetime
   #   # Sections: 
   #   list do; end
   #   export do; end
@@ -222,9 +257,72 @@ RailsAdmin.config do |config|
 #  - has_many/has_one associations in list section (hidden by default for performance reasons)
 # Fields may also be marked as read_only (and thus not editable) if they are not mass-assignable by current_user
 
-  # config.model Retirante do
+  # config.model ProductCategory do
+  #   # Found associations: 
+  #   field :products, :has_many_association
+  #   # Found columns:
+  #   field :id, :integer
+  #   field :nome, :string
+  #   field :created_at, :datetime
+  #   field :updated_at, :datetime
+  #   # Sections: 
+  #   list do; end
+  #   export do; end
+  #   show do; end
+  #   edit do; end
+  #   create do; end
+  #   update do; end
+  #  end
+
+# All fields marked as 'hidden' won't be shown anywhere in the rails_admin unless you mark them as visible.
+# There can be different reasons for that:
+#  - belongs_to _id and _type (polymorphic) columns are hidden in favor of their associations
+#  - associations are hidden if they have no matchable model found (model not included or non-existant)
+#  - they are part of a bigger plan in a plugin (Devise/Paperclip) and hidden by contract
+# Some fields may be hidden depending on the section, if they aren't deemed suitable for display or edition on that section
+#  - non-editable columns (:id, :created_at, ..) in edit sections
+#  - has_many/has_one associations in list section (hidden by default for performance reasons)
+# Fields may also be marked as read_only (and thus not editable) if they are not mass-assignable by current_user
+
+  # config.model Server do
+  #   # Found associations: 
+  #   field :orders, :has_many_association
+  #   # Found columns:
+  #   field :id, :integer
+  #   field :name, :string
+  #   field :server_category_id, :integer
+  #   field :siad, :integer
+  #   field :phone, :integer
+  #   field :email, :string
+  #   field :obs, :text
+  #   field :created_at, :datetime
+  #   field :updated_at, :datetime
+  #   # Sections: 
+  #   list do; end
+  #   export do; end
+  #   show do; end
+  #   edit do; end
+  #   create do; end
+  #   update do; end
+  #  end
+
+# All fields marked as 'hidden' won't be shown anywhere in the rails_admin unless you mark them as visible.
+# There can be different reasons for that:
+#  - belongs_to _id and _type (polymorphic) columns are hidden in favor of their associations
+#  - associations are hidden if they have no matchable model found (model not included or non-existant)
+#  - they are part of a bigger plan in a plugin (Devise/Paperclip) and hidden by contract
+# Some fields may be hidden depending on the section, if they aren't deemed suitable for display or edition on that section
+#  - non-editable columns (:id, :created_at, ..) in edit sections
+#  - has_many/has_one associations in list section (hidden by default for performance reasons)
+# Fields may also be marked as read_only (and thus not editable) if they are not mass-assignable by current_user
+
+  # config.model ServerCategory do
   #   # Found associations: 
   #   # Found columns:
+  #   field :id, :integer
+  #   field :name, :string
+  #   field :created_at, :datetime
+  #   field :updated_at, :datetime
   #   # Sections: 
   #   list do; end
   #   export do; end

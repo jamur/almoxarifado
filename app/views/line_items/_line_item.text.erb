@@ -1,0 +1,4 @@
+<%= sprintf("%2d x %s x %2f",
+line_item.qty,
+truncate(line_item.product.title, length: 50),
+ line_item.total_price   ) %>

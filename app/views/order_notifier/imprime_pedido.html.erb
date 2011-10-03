@@ -1,0 +1,33 @@
+<h1>Confirmação de Retirada</h1>
+
+Prezado(a) <%= @order.server.name %><br/>
+<p>Você solicitou e retirou do Almoxarifado os seguintes itens </p>
+
+
+
+
+<table>
+  <tr>
+    <th>Product</th>
+    <th>Qty</th>
+    <th>Cost</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @order.line_items.each do |line_item| %>
+  <tr>
+    <td><%= line_item.product.title %></td>
+    <td><%= line_item.qty %></td>
+    <td><%= number_to_currency(line_item.product.price, locate: 'pt-br', unit: 'R$ ') %></td>
+
+  </tr>
+<% end %>
+</table>
+
+<p>Total do pedido: <%= number_to_currency(@order.total_price, locate: 'pt-br', unit: 'R$ ') %> </p>
+<p>Na data de: <%= (@order.created_at ).to_s_br%> </p>
+
+
+
